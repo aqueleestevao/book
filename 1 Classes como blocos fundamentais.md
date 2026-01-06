@@ -1,6 +1,6 @@
 ---
 layout: default 
-title: Capítulo 1 - Fundamentos 
+title: 1 Classes como blocos fundamentais
 nav_order: 1 
 has_children: true
 ---
