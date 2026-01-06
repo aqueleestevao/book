@@ -1,0 +1,8 @@
+title: Livro da linguagem de programação Java
+author: Estevão Dias
+description: Aprenda a programar em Java usando a versão JDK 21
+theme: minima # Ou outro tema como 'jekyll-theme-cayman'
+
+# Configurações de URL para o GitHub Pages
+baseurl: "" 
+url: "https://estevaodias.com"
