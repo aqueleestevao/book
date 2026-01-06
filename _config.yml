@@ -1,7 +1,7 @@
 title: Livro da linguagem de programação Java
 author: Estevão Dias
 description: Aprenda a programar em Java usando a versão JDK 21
-theme: minima # Ou outro tema como 'jekyll-theme-cayman'
+remote_theme: just-the-docs/just-the-docs
 
 # Configurações de URL para o GitHub Pages
 baseurl: "" 
