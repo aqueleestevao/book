@@ -22,11 +22,14 @@
 
 ## Fase 1 — Andaime (site atual continua funcionando)
 
-### Task 1: Gemfile mínimo para preview local
+### Task 1: Gemfile + preparação para preview local
 
 **Files:**
 - Create: `Gemfile`
-- Create: `.gitignore` (atualizar existente)
+- Modify: `.gitignore` (atualizar existente)
+- Modify: `_config.yml` (adicionar `exclude` minimal)
+
+**Por que `_config.yml` também muda aqui:** os próprios arquivos em `docs/plans/*.md` contêm blocos Liquid (`{% include ... %}`, `{% assign ... %}`) dentro de code fences. Jekyll processa Liquid *antes* de renderizar Markdown, mesmo dentro de fences, então sem excluir `docs/` o `jekyll build` falha fatal. Adicionar o `exclude` agora é pré-requisito para validar qualquer task subsequente. Um subconjunto do `exclude` final (Task 8) é antecipado.
 
 **Step 1: Criar Gemfile**
 
@@ -60,7 +63,19 @@ vendor/
 .bundle/
 ```
 
-**Step 3: Instalar dependências**
+**Step 3: Adicionar `exclude` mínimo em `_config.yml`**
+
+Ler `_config.yml` e adicionar (antes ou depois das chaves existentes):
+
+```yaml
+exclude:
+  - docs/plans
+  - AGENTS.md
+```
+
+Isso impede que Jekyll tente processar os docs do plano (que contêm Liquid em code fences). Não tocar em nenhuma outra chave do `_config.yml` nesta task.
+
+**Step 4: Instalar dependências**
 
 ```bash
 bundle install
@@ -70,25 +85,24 @@ Expected: instalação completa sem erros. Gera `Gemfile.lock` (gitignored).
 
 Se `bundle` não existir: `gem install bundler` antes.
 
-**Step 4: Rodar preview e validar estado atual**
+**Step 5: Rodar preview e validar estado atual**
 
 ```bash
-bundle exec jekyll serve
+bundle exec jekyll build
 ```
 
-Expected:
-- Build completa sem erros.
-- Site servido em `http://127.0.0.1:4000`.
-- Página atual (tema cream + Fraunces) abre normal.
+Expected: build completa sem erros; `_site/index.html` existe.
 
-Parar o servidor com `Ctrl+C`.
+Alternativa: `bundle exec jekyll serve` e abrir `http://127.0.0.1:4000` (ainda com tema cream + Fraunces do just-the-docs). `Ctrl+C` para parar.
 
-**Step 5: Commit**
+**Step 6: Commit**
 
 ```bash
-git add Gemfile .gitignore
+git add Gemfile .gitignore _config.yml
 git commit -m "add Gemfile for local preview"
 ```
+
+Corpo do commit pode documentar o exclude (ex.: "Also exclude docs/plans from Jekyll processing to fix build — plan files contain raw Liquid tags inside code fences").
 
 ---
 
@@ -553,7 +567,7 @@ exclude:
 ```
 
 Removido: `remote_theme`, `search_enabled`, `custom_css`.
-Adicionado: `lang`, config de kramdown/Rouge, `exclude` (para que `docs/plans/*` não seja publicado, e arquivos meta também).
+Adicionado: `lang`, config de kramdown/Rouge, `exclude` expandido (Task 1 já incluiu `docs/plans` e `AGENTS.md`; aqui ampliamos para `docs/` inteiro, `Gemfile`, `Gemfile.lock`, `vendor`, `README.md`, `CLAUDE.md`).
 
 **Step 3: Remover `jekyll-remote-theme` do Gemfile**
 
