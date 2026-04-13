@@ -1,1 +1,7 @@
 AGENTS.md
+Gemfile.lock
+_site/
+.jekyll-cache/
+.sass-cache/
+vendor/
+.bundle/

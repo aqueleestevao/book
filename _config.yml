@@ -7,5 +7,9 @@ custom_css:
   - custom
 
 # Configurações de URL para o GitHub Pages
-baseurl: "" 
+baseurl: ""
 url: "https://estevaodias.com"
+
+exclude:
+  - docs/plans
+  - AGENTS.md
