@@ -1,0 +1,91 @@
+/* ============================================================
+   book.css — tema próprio, e-reader digital-first
+   ============================================================ */
+
+/* --- Reset mínimo --- */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; }
+img, svg { max-width: 100%; height: auto; display: block; }
+a { color: inherit; }
+
+/* --- Tokens de tema --- */
+:root {
+  /* Cor */
+  --ink:        #000000;
+  --ink-soft:   #2a2a2a;
+  --ink-muted:  #6b6b6b;
+  --paper:      #fafaf7;
+  --rule:       #e6e2da;
+  --link:       #0b5fb0;
+  --link-hover: #083f75;
+  --mark:       #fff3a8;
+  --code-bg:    #f1ede4;
+  --code-ink:   #1a1a1a;
+
+  /* Tipografia */
+  --ff-serif: "Source Serif 4", "Source Serif Pro", Georgia, serif;
+  --ff-sans:  "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --ff-mono:  "JetBrains Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+
+  --fs-xs:    0.75rem;
+  --fs-sm:    0.875rem;
+  --fs-base:  1.0625rem;
+  --fs-lg:    1.25rem;
+  --fs-xl:    1.5rem;
+  --fs-2xl:   2.25rem;
+  --fs-3xl:   clamp(2.5rem, 5vw, 3.5rem);
+
+  --lh-body:  1.65;
+  --lh-tight: 1.2;
+
+  --fw-body:  600;   /* semibold — decisão do autor */
+  --fw-head:  700;
+
+  --measure:  38rem;
+  --space-flow: 1.2em;
+}
+
+html {
+  font-size: 18px;
+  color-scheme: light;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--ff-serif);
+  font-size: var(--fs-base);
+  font-weight: var(--fw-body);
+  line-height: var(--lh-body);
+  font-feature-settings: "kern", "liga", "onum";
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  hyphens: auto;
+}
+
+/* --- Skip link --- */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--ink);
+  color: var(--paper);
+  padding: 0.5rem 1rem;
+  font-family: var(--ff-sans);
+  font-size: var(--fs-sm);
+  z-index: 100;
+}
+.skip-link:focus { left: 0; }
+
+/* --- Foco visível --- */
+:focus-visible {
+  outline: 2px solid var(--link);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+/* --- Redução de movimento --- */
+@media (prefers-reduced-motion: reduce) {
+  * { transition-duration: 0ms !important; animation-duration: 0ms !important; }
+}
