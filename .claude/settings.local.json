@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls -la /Users/edrd/Repositories/EI/book/Gemfile* /Users/edrd/Repositories/EI/book/.github)"
+    ]
+  }
+}
