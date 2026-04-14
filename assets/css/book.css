@@ -89,3 +89,83 @@ body {
 @media (prefers-reduced-motion: reduce) {
   * { transition-duration: 0ms !important; animation-duration: 0ms !important; }
 }
+
+/* ============================================================
+   Layout
+   ============================================================ */
+
+.book-main {
+  max-width: min(100% - 2rem, var(--measure));
+  margin: 0 auto;
+  padding: 4rem 0 6rem;
+}
+
+/* Ritmo vertical */
+.book-main > * + *,
+.chapter-body > * + * {
+  margin-top: var(--space-flow);
+}
+
+/* ============================================================
+   Header
+   ============================================================ */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--paper);
+  border-bottom: 1px solid var(--rule);
+}
+
+.site-header-inner {
+  max-width: min(100% - 2rem, var(--measure));
+  margin: 0 auto;
+  padding: 0.875rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--ff-sans);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+}
+
+.site-id {
+  text-decoration: none;
+  color: var(--ink-soft);
+}
+
+.site-id:hover { color: var(--ink); }
+
+.site-sep {
+  margin: 0 0.35em;
+  color: var(--ink-muted);
+}
+
+.site-nav a {
+  text-decoration: none;
+  color: var(--ink-soft);
+}
+
+.site-nav a:hover { color: var(--ink); }
+
+/* ============================================================
+   Footer
+   ============================================================ */
+
+.site-footer {
+  border-top: 1px solid var(--rule);
+  padding: 2rem 0;
+  margin-top: 6rem;
+}
+
+.site-footer-inner {
+  max-width: min(100% - 2rem, var(--measure));
+  margin: 0 auto;
+  font-family: var(--ff-sans);
+  font-size: var(--fs-sm);
+  color: var(--ink-muted);
+}
+
+.site-footer a { color: var(--ink-soft); }
+.site-footer a:hover { color: var(--link); }
