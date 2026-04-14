@@ -169,3 +169,84 @@ body {
 
 .site-footer a { color: var(--ink-soft); }
 .site-footer a:hover { color: var(--link); }
+
+/* ============================================================
+   Capítulo
+   ============================================================ */
+
+.chapter-header {
+  margin-bottom: 2.5rem;
+}
+
+.chapter-eyebrow {
+  margin: 0;
+  font-family: var(--ff-sans);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  color: var(--ink-muted);
+  letter-spacing: 0.02em;
+}
+
+.chapter-title {
+  margin: 0.25rem 0 0;
+  font-family: var(--ff-serif);
+  font-size: var(--fs-2xl);
+  font-weight: var(--fw-head);
+  line-height: var(--lh-tight);
+  color: var(--ink);
+  text-wrap: balance;
+}
+
+/* Headings dentro do corpo do capítulo */
+.chapter-body h2 {
+  font-family: var(--ff-serif);
+  font-size: var(--fs-xl);
+  font-weight: var(--fw-head);
+  line-height: var(--lh-tight);
+  margin-top: 2.5em;
+  text-wrap: balance;
+}
+
+.chapter-body h3 {
+  font-family: var(--ff-serif);
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-head);
+  line-height: var(--lh-tight);
+  margin-top: 2em;
+  text-wrap: balance;
+}
+
+/* Compatibilidade com padrão existente: "### **Texto**" — anula o bold duplicado */
+.chapter-body h3 > strong:only-child {
+  font-weight: inherit;
+}
+
+.chapter-body p {
+  text-wrap: pretty;
+}
+
+.chapter-body ul,
+.chapter-body ol {
+  padding-left: 1.5em;
+}
+
+.chapter-body li + li {
+  margin-top: 0.4em;
+}
+
+.chapter-body blockquote {
+  margin: 0;
+  padding-left: 1rem;
+  border-left: 2px solid var(--rule);
+  color: var(--ink-soft);
+}
+
+.chapter-body a {
+  color: var(--link);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.15em;
+}
+
+.chapter-body a:hover {
+  color: var(--link-hover);
+}
