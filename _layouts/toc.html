@@ -1,0 +1,26 @@
+---
+layout: default
+---
+{% assign chapters = site.pages | where: "layout", "chapter" | sort: "order" %}
+
+<section class="book-cover">
+  <p class="book-cover-eyebrow">{{ site.author }}</p>
+  <h1 class="book-cover-title">{{ site.title }}</h1>
+  {% if site.description %}
+    <p class="book-cover-lede">{{ site.description }}</p>
+  {% endif %}
+</section>
+
+<nav class="toc" aria-label="Sumário">
+  <ol class="toc-list">
+    {% for ch in chapters %}
+      {% assign depth = ch.number | split: "." | size %}
+      <li class="toc-item toc-depth-{{ depth }}">
+        <a href="{{ ch.url | relative_url }}">
+          <span class="toc-num">{{ ch.number }}</span>
+          <span class="toc-title">{{ ch.title }}</span>
+        </a>
+      </li>
+    {% endfor %}
+  </ol>
+</nav>
