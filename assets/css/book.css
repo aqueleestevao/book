@@ -305,3 +305,58 @@ code, pre {
 .hl .c, .hl .c1, .hl .cm, .hl .cp,
 .hl .cs, .hl .cd                   { color: var(--ink-muted); font-style: italic; }  /* comentários */
 /* qualquer outra classe .hl .* herda --code-ink naturalmente */
+
+/* ============================================================
+   Footer-nav (navegação entre seções)
+   ============================================================ */
+
+.footer-nav {
+  max-width: min(100% - 2rem, var(--measure));
+  margin: 5rem auto 0;
+  padding-top: 2rem;
+  border-top: 1px solid var(--rule);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  font-family: var(--ff-sans);
+  font-size: var(--fs-sm);
+}
+
+.footer-nav-slot {
+  min-height: 3rem;   /* reserva espaço mesmo quando vazio */
+}
+
+.footer-nav-next {
+  text-align: right;
+}
+
+.footer-nav a {
+  text-decoration: none;
+  color: var(--ink);
+  display: flex;
+  align-items: baseline;
+  gap: 0.5em;
+}
+
+.footer-nav-next a {
+  justify-content: flex-end;
+}
+
+.footer-nav-num {
+  color: var(--ink-muted);
+  font-variant-numeric: oldstyle-nums;
+}
+
+.footer-nav-title {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.footer-nav a:hover .footer-nav-title {
+  color: var(--link);
+}
+
+.footer-nav-arrow {
+  color: var(--ink-muted);
+  font-size: 1.1em;
+}
