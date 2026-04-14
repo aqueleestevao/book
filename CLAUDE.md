@@ -4,39 +4,64 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project overview
 
-Jekyll site published via GitHub Pages at `https://estevaodias.com` (CNAME). It is a Portuguese-language (pt-BR) textbook teaching Java (JDK 21), authored by Estevão Dias. There is no application code — every change is to Markdown content, the `_config.yml`, the `_includes/` partials, or `assets/css/custom.css`.
-
-Note: the `/init` invocation described this repo as posts about software architecture / backend engineering. That does not match the current content (`_config.yml` title is "Java", description "Aprenda a programar em Java usando a versão JDK 21"). Treat the repo as a Java textbook unless the user says otherwise.
+Jekyll site published via GitHub Pages at `https://estevaodias.com` (CNAME). It is a Portuguese-language (pt-BR) textbook teaching Java (JDK 21), authored by Estevão Dias. There is no application code — every change is to Markdown content, the `_config.yml`, the theme files under `_layouts/` / `_includes/`, or `assets/css/book.css`.
 
 ## Build / preview
 
-There is no `Gemfile`, no CI workflow, and no build script committed. GitHub Pages builds the site server-side using the `just-the-docs/just-the-docs` remote theme declared in `_config.yml`. Local preview therefore requires the user to install Jekyll + the remote-theme plugin themselves; do not invent a build command. If the user asks to preview locally, suggest the standard `bundle exec jekyll serve` only after confirming they have a Gemfile set up.
+`bundle install` once, then `bundle exec jekyll serve` to preview at `http://127.0.0.1:4000`. `Gemfile` pins the `github-pages` gem so local builds match production. `Gemfile.lock` is gitignored.
 
-## Content architecture
+## Theme architecture
 
-- `index.md` is the table of contents and links manually into section pages under `100/`.
-- The `100/` directory is a chapter/part folder. All content currently lives there (the repo was recently restructured — see `git status`, every Markdown file was moved from the root into `100/`).
-- File names encode the navigation hierarchy as a dotted outline: `1`, `1.1`, `1.1.1`, `1.10.1.2`, etc. The numeric prefix in the filename **must** match the `title` in the front matter and the position in the outline. When adding a new sub-section, renumber siblings if needed and update any link in `index.md` or sibling pages that points to the renumbered file.
-- Just-the-docs navigation is driven by YAML front matter, not by directory structure:
-  ```yaml
-  ---
-  layout: default
-  title: 1.1 Objetos como instâncias de uma classe
-  nav_order: 1
-  has_children: true   # only on pages that have sub-pages
-  ---
-  ```
-  Parent/section pages (`1`, `1.1`, `1.10`, …) carry `has_children: true`. Many leaf pages in `100/` currently have **no front matter at all** — that is the existing pattern, not necessarily intentional. Before adding front matter to a leaf page, check whether neighboring leaves have it; match the local convention and ask the user if unclear.
-- Page bodies follow a consistent didactic template: short prose intro → `### **Exemplo conceitual**` with a fenced code block → `### **Explicação linha a linha**` walking through the snippet line-by-line. Preserve this structure when editing or adding content.
-- Code samples are fenced blocks. Java samples may use ```` ```java ```` or an unlabeled ```` ``` ```` — both appear in existing pages. Match whatever the surrounding file uses rather than reformatting.
+This repo uses a **custom Jekyll theme** living in this repo — not a remote theme. The structure is:
 
-## Theming and assets
+- `_layouts/default.html` — HTML skeleton (head, skip link, header, main, footer).
+- `_layouts/chapter.html` — layout for all content pages in `100/`. Wraps `{{ content }}` in `<article class="chapter">` with an eyebrow (`page.number`) and an h1 (`page.title`), followed by the footer-nav include.
+- `_layouts/toc.html` — layout for `index.md`. Generates the book's table of contents from `site.pages | where: "layout", "chapter" | sort: "order"`.
+- `_includes/head.html` — `<head>` element with fonts (Source Serif 4, Inter, JetBrains Mono via Google Fonts), `<meta name="color-scheme" content="light">`, and link to `book.css`.
+- `_includes/header.html` — thin sticky header with site title/author and a "Sumário" link.
+- `_includes/footer-nav.html` — computes previous/next chapter via Liquid by sorting all chapter pages by their `order` field. Renders two slots (even when one is empty, to prevent layout shift).
+- `_includes/footer.html` — minimal footer with author line and sumário link.
+- `assets/css/book.css` — single stylesheet. Design tokens at the top (`--ink`, `--paper`, font families, scale, measure). Sections for layout, header/footer, chapter typography, code, footer-nav, TOC.
 
-- Theme is set via `remote_theme: just-the-docs/just-the-docs` in `_config.yml`. There is no local `_layouts/` or `_sass/` — overrides go through `_includes/head_custom.html` (currently loads Google Fonts: Fraunces, JetBrains Mono, Work Sans) and `assets/css/custom.css` (referenced as `custom_css: [custom]` in `_config.yml`).
-- `search_enabled: true` is on; just-the-docs builds the index from page front matter, so pages without front matter will not be searchable or appear in the side nav.
+There is no JavaScript in v1.
 
-## Conventions to respect
+## Content convention — front matter
 
-- All prose, headings, titles, and committed comments are in Portuguese (pt-BR). Do not translate to English unless explicitly asked.
-- File names contain spaces and accented characters (e.g. `1.1.1 Referências a objetos.md`). Internal links from `index.md` and any cross-page links must URL-encode spaces as `%20` — see `index.md` for the established style.
-- `AGENTS.md` is gitignored — don't commit it.
+Every Markdown file in `100/` uses this schema:
+
+```yaml
+---
+layout: chapter
+order: <integer>
+number: "<x.y.z dotted>"
+title: "<title without numeric prefix>"
+---
+```
+
+- `order` is an integer used only for sorting (`site.pages | sort: "order"`). Computed deterministically from `number`: each dotted component occupies two decimal digits. `1` → 1000000, `1.1` → 1010000, `1.10.1.2` → 1100102. See `scripts/migrate-frontmatter.rb` (if still in the repo) for the algorithm.
+- `number` is the display number shown in the eyebrow of `<h1>` and in the TOC.
+- `title` is the title *without* the numeric prefix. The template renders `number` and `title` separately.
+
+When adding a new page:
+1. Pick the correct dotted `number`. If inserting mid-sequence, renumber siblings as needed.
+2. Compute `order` with the rule above.
+3. Write `title` without the numeric prefix.
+4. No need to touch `index.md` — the TOC is generated automatically.
+
+`index.md` is `layout: toc` with an empty body.
+
+## Content body convention
+
+Pages follow a didactic template: short prose → `### **Exemplo conceitual**` with a fenced code block → `### **Explicação linha a linha**` walking through the snippet. `book.css` has a rule that strips the duplicated bold from `### **...**` (it detects `h3 > strong:only-child` and resets `font-weight`). Keep the pattern when editing existing pages, but the v2 evolution is to standardize these into Liquid includes (not in scope for v1).
+
+Code fences: both ```` ```java ```` and unlabeled ```` ``` ```` appear. Rouge (via kramdown) handles syntax highlighting regardless; the CSS in `book.css` under `.hl` styles it.
+
+## Locale and file naming
+
+- All prose, titles and commit messages in pt-BR (file names included — they contain spaces and accented chars).
+- Internal links must URL-encode spaces as `%20`.
+- `lang: pt-BR` is set site-wide in `_config.yml` so `hyphens: auto` and screen readers work correctly.
+
+## Gitignored
+
+- `AGENTS.md`, `Gemfile.lock`, `_site/`, `.jekyll-cache/`, `vendor/`, `.bundle/`.
