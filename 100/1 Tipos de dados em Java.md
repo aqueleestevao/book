@@ -1,3 +1,10 @@
+---
+layout: chapter
+order: 1120000
+number: '1.12'
+title: Tipos de dados em Java
+---
+
 Em Java, existem dois grandes grupos de tipos de dados: **tipos primitivos** e **tipos de referência**. Essa distinção define como os dados são armazenados em memória, como são passados para métodos e como operações sobre eles se comportam.
 ### **Exemplo conceitual**
 

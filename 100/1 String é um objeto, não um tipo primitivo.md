@@ -1,3 +1,10 @@
+---
+layout: chapter
+order: 1120500
+number: 1.12.5
+title: String é um objeto, não um tipo primitivo
+---
+
 Em Java, String **não** é um tipo primitivo; ela é uma classe. Isso significa que valores do tipo String são objetos, armazenados no heap e manipulados por meio de referências, mesmo que a linguagem ofereça uma sintaxe conveniente para sua criação.
 ### **Exemplo conceitual**
 

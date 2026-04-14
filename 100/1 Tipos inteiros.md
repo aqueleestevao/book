@@ -1,3 +1,10 @@
+---
+layout: chapter
+order: 1120200
+number: 1.12.2
+title: Tipos inteiros
+---
+
 Os tipos byte, short, int e long são **tipos primitivos inteiros**, ou seja, representam números sem parte decimal. Cada um desses tipos ocupa uma quantidade diferente de memória e possui um intervalo específico de valores possíveis.
 ### **Exemplo conceitual**
 

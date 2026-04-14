@@ -1,3 +1,10 @@
+---
+layout: chapter
+order: 1120100
+number: 1.12.1
+title: Tipos primitivos não são objetos
+---
+
 Um **tipo primitivo** não é um objeto. Ele representa apenas um valor único armazenado diretamente na memória, sem identidade, sem comportamento e sem referência associada. Primitivos existem para fornecer uma forma simples e eficiente de trabalhar com dados básicos.
 ### **Exemplo conceitual**
 

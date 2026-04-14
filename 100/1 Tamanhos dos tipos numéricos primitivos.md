@@ -1,3 +1,10 @@
+---
+layout: chapter
+order: 1120400
+number: 1.12.4
+title: Tamanhos dos tipos numéricos primitivos
+---
+
 Os tipos numéricos primitivos em Java possuem **tamanhos fixos**, definidos pela linguagem, o que garante comportamento consistente em qualquer plataforma. Na prática, o tipo int é suficiente para a maioria dos cenários e deve ser a escolha padrão, a menos que exista uma razão clara para usar um tipo menor (memória) ou maior (intervalo de valores).
 ### **Exemplo conceitual**
 

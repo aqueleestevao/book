@@ -1,3 +1,10 @@
+---
+layout: chapter
+order: 1120300
+number: 1.12.3
+title: Tipos numéricos com sinal
+---
+
 Os tipos numéricos primitivos em Java são **com sinal** (_signed_). Isso significa que parte dos bits disponíveis é reservada para representar valores negativos. Como consequência, o intervalo de valores possíveis é dividido entre números negativos e positivos. Por exemplo, um byte utiliza 8 bits, permitindo representar valores de -128 a 127.
 ### **Exemplo conceitual**
 

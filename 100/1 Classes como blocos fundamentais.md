@@ -1,9 +1,10 @@
 ---
-layout: default 
-title: 1 Classes como blocos fundamentais
-nav_order: 1 
-has_children: true
+layout: chapter
+order: 1000000
+number: '1'
+title: Classes como blocos fundamentais
 ---
+
 Classes são os blocos fundamentais da linguagem Java. Todo programa Java é estruturado a partir de classes, que definem de forma explícita quais dados um objeto possui e quais operações podem ser realizadas sobre esses dados. Essa estrutura não é apenas organizacional: ela é validada pelo compilador e serve como base para segurança de tipos, legibilidade e manutenção do código ao longo do tempo.
 ### **Exemplo conceitual**
 
