@@ -1,0 +1,35 @@
+{% assign chapters = site.pages | where: "layout", "chapter" | sort: "order" %}
+{% assign current_idx = -1 %}
+{% for ch in chapters %}
+  {% if ch.order == page.order %}
+    {% assign current_idx = forloop.index0 %}
+    {% break %}
+  {% endif %}
+{% endfor %}
+{% if current_idx > -1 %}
+  {% assign prev_idx = current_idx | minus: 1 %}
+  {% assign next_idx = current_idx | plus: 1 %}
+  {% assign prev_page = chapters[prev_idx] %}
+  {% assign next_page = chapters[next_idx] %}
+
+  <nav class="footer-nav" aria-label="Navegação entre seções">
+    <div class="footer-nav-slot footer-nav-prev">
+      {% if prev_idx >= 0 and prev_page %}
+        <a href="{{ prev_page.url | relative_url }}">
+          <span class="footer-nav-arrow" aria-hidden="true">←</span>
+          <span class="footer-nav-num">{{ prev_page.number }}</span>
+          <span class="footer-nav-title">{{ prev_page.title }}</span>
+        </a>
+      {% endif %}
+    </div>
+    <div class="footer-nav-slot footer-nav-next">
+      {% if next_page %}
+        <a href="{{ next_page.url | relative_url }}">
+          <span class="footer-nav-num">{{ next_page.number }}</span>
+          <span class="footer-nav-title">{{ next_page.title }}</span>
+          <span class="footer-nav-arrow" aria-hidden="true">→</span>
+        </a>
+      {% endif %}
+    </div>
+  </nav>
+{% endif %}
