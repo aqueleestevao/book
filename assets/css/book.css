@@ -360,3 +360,84 @@ code, pre {
   color: var(--ink-muted);
   font-size: 1.1em;
 }
+
+/* ============================================================
+   Sumário (index, layout: toc)
+   ============================================================ */
+
+.book-cover {
+  text-align: center;
+  margin: 4rem 0 5rem;
+}
+
+.book-cover-eyebrow {
+  margin: 0;
+  font-family: var(--ff-sans);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  color: var(--ink-muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.book-cover-title {
+  margin: 0.5rem 0 0.75rem;
+  font-family: var(--ff-serif);
+  font-size: var(--fs-3xl);
+  font-weight: var(--fw-head);
+  line-height: var(--lh-tight);
+  color: var(--ink);
+}
+
+.book-cover-lede {
+  margin: 0 auto;
+  max-width: 30rem;
+  font-family: var(--ff-serif);
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-body);
+  color: var(--ink-soft);
+  text-wrap: balance;
+}
+
+.toc-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.toc-item + .toc-item {
+  margin-top: 0.25rem;
+}
+
+.toc-item a {
+  display: grid;
+  grid-template-columns: 5rem 1fr;
+  gap: 0.5rem;
+  padding: 0.35rem 0;
+  text-decoration: none;
+  color: var(--ink);
+}
+
+.toc-num {
+  font-family: var(--ff-sans);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  color: var(--ink-muted);
+  font-variant-numeric: oldstyle-nums;
+  text-align: right;
+}
+
+.toc-title {
+  font-family: var(--ff-serif);
+  font-size: var(--fs-base);
+  font-weight: var(--fw-body);
+}
+
+.toc-item a:hover .toc-title {
+  color: var(--link);
+}
+
+/* Indentação por profundidade */
+.toc-depth-2 .toc-title { padding-left: 0.75rem; }
+.toc-depth-3 .toc-title { padding-left: 1.5rem; color: var(--ink-soft); }
+.toc-depth-4 .toc-title { padding-left: 2.25rem; color: var(--ink-muted); font-size: var(--fs-sm); }
