@@ -250,3 +250,58 @@ body {
 .chapter-body a:hover {
   color: var(--link-hover);
 }
+
+/* ============================================================
+   Código
+   ============================================================ */
+
+code, pre {
+  font-family: var(--ff-mono);
+  font-feature-settings: "calt", "liga" 0;
+}
+
+/* inline */
+.chapter-body code {
+  font-size: 0.92em;
+  padding: 0.05em 0.35em;
+  background: var(--code-bg);
+  border-radius: 3px;
+}
+
+.chapter-body pre {
+  margin: 1.5em 0;
+  padding: 1rem 1.25rem;
+  background: var(--code-bg);
+  border-radius: 6px;
+  overflow-x: auto;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--code-ink);
+  font-weight: 400;
+}
+
+.chapter-body pre code {
+  background: transparent;
+  padding: 0;
+  font-size: inherit;
+  border-radius: 0;
+}
+
+/* Bloco estoura medida em telas largas */
+@media (min-width: 50rem) {
+  .chapter-body pre {
+    margin-left: -2rem;
+    margin-right: -2rem;
+  }
+}
+
+/* Syntax highlight — Rouge (classes .hl) */
+.hl .k, .hl .kt, .hl .kd, .hl .kn { font-weight: 700; }         /* keywords e tipos */
+.hl .nc, .hl .nn                   { color: var(--link); }       /* classes e namespaces */
+.hl .s, .hl .s1, .hl .s2,
+.hl .sc, .hl .sb, .hl .sh          { color: #7a3e00; font-style: italic; }  /* strings */
+.hl .mi, .hl .mf, .hl .mh,
+.hl .mo                            { color: #7a3e00; }            /* números */
+.hl .c, .hl .c1, .hl .cm, .hl .cp,
+.hl .cs, .hl .cd                   { color: var(--ink-muted); font-style: italic; }  /* comentários */
+/* qualquer outra classe .hl .* herda --code-ink naturalmente */
