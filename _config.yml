@@ -1,15 +1,25 @@
 title: Java
 author: Estevão Dias
 description: Aprenda a programar em Java usando a versão JDK 21
-remote_theme: just-the-docs/just-the-docs
-search_enabled: true
-custom_css:
-  - custom
+lang: pt-BR
 
-# Configurações de URL para o GitHub Pages
 baseurl: ""
 url: "https://estevaodias.com"
 
+markdown: kramdown
+highlighter: rouge
+kramdown:
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    css_class: "hl"
+    block:
+      line_numbers: false
+
 exclude:
-  - docs/plans
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - docs
+  - README.md
+  - CLAUDE.md
   - AGENTS.md
